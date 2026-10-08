@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure Login System | CyberShield Architecture</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="/" class="nav-brand">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      </svg>
+      Secure<span>Shield</span> Auth
+    </a>
+    <div class="nav-links">
+      <a href="/login.html" class="nav-link">Sign In</a>
+      <a href="/register.html" class="btn btn-primary btn-sm" style="width: auto;">Get Started</a>
+      <a href="/security-demo.html" class="nav-link">Security Playground</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div style="text-align: center; margin: 4rem 0 3rem;">
+      <span class="badge badge-info" style="margin-bottom: 1rem;">Enterprise-Grade Security Baseline</span>
+      <h1 style="font-size: 3rem; font-weight: 800; line-height: 1.2; letter-spacing: -0.03em; margin-bottom: 1rem;">
+        Secure Authentication & <br><span style="color: #38bdf8;">Identity Management</span> System
+      </h1>
+      <p style="font-size: 1.15rem; color: #94a3b8; max-width: 680px; margin: 0 auto 2rem;">
+        Engineered to resist OWASP Top 10 vulnerabilities with bcrypt salting, parameterized SQL statements, session fixation protection, and Time-based One-Time Password (TOTP) 2FA.
+      </p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="/register.html" class="btn btn-primary" style="width: auto; padding: 0.85rem 2rem;">Create Protected Account</a>
+        <a href="/security-demo.html" class="btn btn-secondary" style="width: auto; padding: 0.85rem 2rem;">Explore Security Demo</a>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 3rem;">
+      <div class="card">
+        <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">🔒</div>
+        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #38bdf8;">Bcrypt Password Hashing</h3>
+        <p style="color: #94a3b8; font-size: 0.9rem;">
+          Passwords are never stored in plaintext. Adaptive 12-round cryptographic salting neutralizes Rainbow Tables and dictionary attacks.
+        </p>
+      </div>
+
+      <div class="card">
+        <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">🛡️</div>
+        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #10b981;">SQL Injection Immunity</h3>
+        <p style="color: #94a3b8; font-size: 0.9rem;">
+          Every database interaction uses parameterized prepared statements. Untrusted user inputs are treated exclusively as literal data.
+        </p>
+      </div>
+
+      <div class="card">
+        <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">🔑</div>
+        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #f59e0b;">Two-Factor Authentication (2FA)</h3>
+        <p style="color: #94a3b8; font-size: 0.9rem;">
+          RFC 6238 TOTP compatible with Google Authenticator and Authy, featuring real-time QR code pairing and emergency single-use backup recovery codes.
+        </p>
+      </div>
+
+      <div class="card">
+        <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">🍪</div>
+        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #38bdf8;">Hardened Session Management</h3>
+        <p style="color: #94a3b8; font-size: 0.9rem;">
+          HttpOnly and SameSite cookie policies prevent XSS token theft and CSRF attacks. Session IDs regenerate on login to neutralize session fixation.
+        </p>
+      </div>
+
+      <div class="card">
+        <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">⏱️</div>
+        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #ef4444;">Brute-Force & Lockout Guard</h3>
+        <p style="color: #94a3b8; font-size: 0.9rem;">
+          Rate-limiting and account lockout mechanisms mitigate automated credential stuffing and dictionary attacks after failed attempts.
+        </p>
+      </div>
+
+      <div class="card">
+        <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">📋</div>
+        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #a855f7;">Security Audit Logging</h3>
+        <p style="color: #94a3b8; font-size: 0.9rem;">
+          Every authentication attempt, 2FA challenge, password update, and logout event is tracked with client IP, user agent, and timestamp.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Secure Login System &bull; Production Security Architecture &bull; Built with Node.js, Express, SQLite & Bcrypt</p>
+  </footer>
+</body>
+</html>

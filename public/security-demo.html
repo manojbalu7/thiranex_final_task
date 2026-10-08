@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Security Playground | SecureShield</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="/" class="nav-brand">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      </svg>
+      Secure<span>Shield</span> Auth
+    </a>
+    <div class="nav-links">
+      <a href="/login.html" class="nav-link">Sign In</a>
+      <a href="/register.html" class="nav-link">Register</a>
+      <a href="/dashboard.html" class="nav-link">Dashboard</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div style="margin-bottom: 2rem;">
+      <span class="badge badge-info" style="margin-bottom: 0.5rem;">Interactive Demonstration</span>
+      <h1 style="font-size: 2.25rem; font-weight: 800; letter-spacing: -0.025em;">Security Architecture Playground</h1>
+      <p style="color: #94a3b8; font-size: 1rem;">
+        Test and visualize how parameterized queries neutralize SQL injection attacks and how adaptive bcrypt salting thwarts credential breaches.
+      </p>
+    </div>
+
+    <!-- SQL INJECTION LAB -->
+    <div class="card" style="margin-bottom: 2rem;">
+      <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+        <span style="font-size: 1.5rem;">🛡️</span>
+        <h2 style="font-size: 1.5rem; font-weight: 700;">SQL Injection Neutralization Lab</h2>
+      </div>
+      <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 1.25rem;">
+        Try injecting classic SQL exploit payloads. Observe how our database driver compiles queries with parameter placeholders (<code>?</code>), preventing user input from escaping data boundaries.
+      </p>
+
+      <div style="margin-bottom: 1rem;">
+        <span style="font-size: 0.8rem; color: #cbd5e1; font-weight: 600;">Sample Payloads:</span>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.4rem;">
+          <button type="button" class="btn btn-secondary btn-sm sqli-preset" data-payload="' OR '1'='1">' OR '1'='1 (Auth Bypass)</button>
+          <button type="button" class="btn btn-secondary btn-sm sqli-preset" data-payload="admin' --">admin' -- (Comment Out)</button>
+          <button type="button" class="btn btn-secondary btn-sm sqli-preset" data-payload="'; DROP TABLE users; --">'; DROP TABLE (Destructive)</button>
+          <button type="button" class="btn btn-secondary btn-sm sqli-preset" data-payload="' UNION SELECT 1, 'hacked', 'hacked' --">' UNION SELECT (Data Exfiltration)</button>
+        </div>
+      </div>
+
+      <form id="sqli-demo-form" style="display: flex; gap: 0.75rem; margin-bottom: 1.5rem;">
+        <input type="text" id="sqli-input" class="form-control" placeholder="Enter test SQL query payload..." value="' OR '1'='1" required>
+        <button type="submit" class="btn btn-primary" style="width: auto; white-space: nowrap;">Test Payload</button>
+      </form>
+
+      <div id="sqli-result-container" style="background: rgba(15, 23, 42, 0.6); padding: 1.25rem; border-radius: 0.5rem; border: 1px solid var(--border-color);">
+        <p style="color: #94a3b8; font-size: 0.9rem;">Click "Test Payload" or select a preset above to analyze execution behavior.</p>
+      </div>
+    </div>
+
+    <!-- BCRYPT HASHING LAB -->
+    <div class="card" style="margin-bottom: 2rem;">
+      <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+        <span style="font-size: 1.5rem;">🔒</span>
+        <h2 style="font-size: 1.5rem; font-weight: 700;">Bcrypt Salting & Cost Factor Lab</h2>
+      </div>
+      <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 1.25rem;">
+        Observe how bcrypt automatically applies a 128-bit cryptographic salt and iterates \(2^{12}\) (4,096) times to compute an adaptive, crack-resistant hash.
+      </p>
+
+      <form id="hash-demo-form" style="display: flex; gap: 0.75rem; margin-bottom: 1.25rem;">
+        <input type="text" id="hash-password-input" class="form-control" placeholder="Enter any test password..." value="MySecretPassword@2026" required>
+        <button type="submit" class="btn btn-primary" style="width: auto; white-space: nowrap;">Generate Bcrypt Hash</button>
+      </form>
+
+      <div id="hash-result-container" style="background: rgba(15, 23, 42, 0.6); padding: 1.25rem; border-radius: 0.5rem; border: 1px solid var(--border-color);">
+        <p style="color: #94a3b8; font-size: 0.9rem;">Click "Generate Bcrypt Hash" to test the hashing engine.</p>
+      </div>
+    </div>
+
+    <!-- SESSION & COOKIE SECURITY -->
+    <div class="card">
+      <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+        <span style="font-size: 1.5rem;">🍪</span>
+        <h2 style="font-size: 1.5rem; font-weight: 700;">Live Session & Defensive Header Inspector</h2>
+      </div>
+      <p style="color: #94a3b8; font-size: 0.9rem;">
+        Defensive browser security controls currently safeguarding this session:
+      </p>
+
+      <div id="security-info-container">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Secure Login System &bull; Live Interactive Cybersecurity Education Lab</p>
+  </footer>
+
+  <script src="/js/security-demo.js"></script>
+</body>
+</html>

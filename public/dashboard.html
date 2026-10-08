@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Security Dashboard | SecureShield</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="/dashboard.html" class="nav-brand">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      </svg>
+      Secure<span>Shield</span> Dashboard
+    </a>
+    <div class="nav-links">
+      <span style="font-size: 0.9rem; color: #94a3b8;">User: <strong id="user-name-display" style="color: #f8fafc;">...</strong></span>
+      <a href="/security-demo.html" class="nav-link">Security Demo</a>
+      <button id="btn-logout" class="btn btn-secondary btn-sm" style="width: auto;">Sign Out</button>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+      <div>
+        <h1 style="font-size: 2rem; font-weight: 700; letter-spacing: -0.025em;">Account & Security Center</h1>
+        <p style="color: #94a3b8; font-size: 0.95rem;">Manage your active session, credentials, and Two-Factor Authentication</p>
+      </div>
+      <div>
+        <span class="badge badge-success">Session Active (HttpOnly / SameSite)</span>
+      </div>
+    </div>
+
+    <div class="dashboard-grid">
+      <!-- LEFT COLUMN: Profile & 2FA Control -->
+      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        <!-- Profile Overview Card -->
+        <div class="card">
+          <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 1rem; color: #38bdf8;">Profile Information</h3>
+          
+          <div style="margin-bottom: 0.75rem;">
+            <div style="font-size: 0.8rem; color: #94a3b8;">Username</div>
+            <div id="profile-username" style="font-weight: 600; font-size: 1rem;">...</div>
+          </div>
+
+          <div style="margin-bottom: 0.75rem;">
+            <div style="font-size: 0.8rem; color: #94a3b8;">Email Address</div>
+            <div id="profile-email" style="font-weight: 600; font-size: 1rem;">...</div>
+          </div>
+
+          <div style="margin-bottom: 0.75rem;">
+            <div style="font-size: 0.8rem; color: #94a3b8;">Member Since</div>
+            <div id="profile-created" style="font-size: 0.9rem; color: #cbd5e1;">...</div>
+          </div>
+
+          <div>
+            <div style="font-size: 0.8rem; color: #94a3b8;">Session Token Identifier</div>
+            <code id="session-id-preview" style="font-size: 0.85rem; color: #38bdf8;">...</code>
+          </div>
+        </div>
+
+        <!-- Two-Factor Authentication Card -->
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <h3 style="font-size: 1.15rem; font-weight: 700; color: #f59e0b;">Two-Factor Authentication</h3>
+            <span id="2fa-status-badge" class="badge">Checking...</span>
+          </div>
+
+          <p style="font-size: 0.875rem; color: #94a3b8; margin-bottom: 1.25rem;">
+            Add a robust layer of defense. Requires a one-time code from Google Authenticator or Authy alongside your password.
+          </p>
+
+          <button id="btn-enable-2fa" class="btn btn-success" style="width: 100%; display: none;">
+            Setup Two-Factor Authentication (2FA)
+          </button>
+
+          <button id="btn-disable-2fa" class="btn btn-danger" style="width: 100%; display: none;">
+            Disable Two-Factor Authentication
+          </button>
+        </div>
+
+        <!-- Change Password Card -->
+        <div class="card">
+          <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 1rem; color: #38bdf8;">Change Password</h3>
+          <div id="password-alert" class="alert"></div>
+
+          <form id="change-password-form">
+            <div class="form-group">
+              <label class="form-label" for="current-password">Current Password</label>
+              <input type="password" id="current-password" class="form-control" placeholder="••••••••••••" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="new-password">New Password</label>
+              <input type="password" id="new-password" class="form-control" placeholder="••••••••••••" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="confirm-new-password">Confirm New Password</label>
+              <input type="password" id="confirm-new-password" class="form-control" placeholder="••••••••••••" required>
+            </div>
+
+            <button type="submit" id="btn-update-password" class="btn btn-secondary" style="width: 100%;">
+              Update Password
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: Security Audit Log -->
+      <div>
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <h3 style="font-size: 1.25rem; font-weight: 700;">Security Audit Trail</h3>
+            <span style="font-size: 0.8rem; color: #94a3b8;">Real-Time Activity</span>
+          </div>
+          <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 1rem;">
+            Chronological audit log tracking all authentication events, device signatures, and access results.
+          </p>
+
+          <div class="table-container">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Event Status</th>
+                  <th>IP Address</th>
+                  <th>User Agent</th>
+                  <th>Timestamp</th>
+                </tr>
+              </thead>
+              <tbody id="audit-table-body">
+                <tr>
+                  <td colspan="4" style="text-align: center; color: #94a3b8;">Loading audit records...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- MODAL: 2FA SETUP -->
+  <div id="setup-2fa-modal" class="modal-overlay">
+    <div class="modal-card" style="text-align: center;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <h3 style="font-size: 1.25rem; font-weight: 700;">Set Up Two-Factor Authentication</h3>
+        <button class="modal-close btn-secondary btn-sm" style="padding: 0.2rem 0.6rem; cursor: pointer;">✕</button>
+      </div>
+
+      <div id="setup-alert" class="alert"></div>
+
+      <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 0.5rem;">
+        Scan this QR code with <strong>Google Authenticator</strong>, <strong>Microsoft Authenticator</strong>, or <strong>Authy</strong>:
+      </p>
+
+      <div class="qr-preview-box">
+        <img id="qr-image" src="" alt="2FA QR Code" style="width: 200px; height: 200px; display: block;">
+      </div>
+
+      <div style="margin-bottom: 1.25rem;">
+        <div style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 0.35rem;">Or enter this secret key manually:</div>
+        <div style="display: flex; gap: 0.5rem; justify-content: center; align-items: center;">
+          <span id="secret-key-text" class="secret-key-display"></span>
+          <button id="btn-copy-secret" class="btn btn-secondary btn-sm" type="button">Copy Key</button>
+        </div>
+      </div>
+
+      <form id="confirm-2fa-form">
+        <div class="form-group" style="text-align: center;">
+          <label class="form-label" for="confirm-code-input">Enter the 6-digit code shown in the app:</label>
+          <input type="text" id="confirm-code-input" class="form-control" placeholder="123456" maxlength="6" style="text-align: center; font-size: 1.3rem; letter-spacing: 0.25em; max-width: 200px; margin: 0 auto;" required>
+        </div>
+
+        <button type="submit" id="btn-submit-confirm" class="btn btn-primary" style="margin-top: 0.5rem;">
+          Verify & Activate 2FA
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: EMERGENCY BACKUP CODES -->
+  <div id="backup-codes-modal" class="modal-overlay">
+    <div class="modal-card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <h3 style="font-size: 1.25rem; font-weight: 700; color: #10b981;">⚠️ Save Emergency Backup Codes</h3>
+        <button class="modal-close btn-secondary btn-sm" style="padding: 0.2rem 0.6rem; cursor: pointer;">✕</button>
+      </div>
+
+      <p style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 0.75rem;">
+        If you lose your mobile device, these single-use codes are the <strong>only way</strong> to regain access to your account. Store them in a secure password manager or safe place.
+      </p>
+
+      <div id="backup-codes-container" class="backup-codes-grid">
+        <!-- Rendered by JS -->
+      </div>
+
+      <div style="display: flex; gap: 0.75rem; margin-top: 1rem;">
+        <button id="btn-copy-backup" class="btn btn-secondary" style="flex: 1;">Copy Codes</button>
+        <button id="btn-download-backup" class="btn btn-primary" style="flex: 1;">Download (.txt)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: DISABLE 2FA -->
+  <div id="disable-2fa-modal" class="modal-overlay">
+    <div class="modal-card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <h3 style="font-size: 1.25rem; font-weight: 700; color: #ef4444;">Disable Two-Factor Authentication</h3>
+        <button class="modal-close btn-secondary btn-sm" style="padding: 0.2rem 0.6rem; cursor: pointer;">✕</button>
+      </div>
+
+      <div id="disable-alert" class="alert"></div>
+
+      <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 1rem;">
+        To disable 2FA, please enter your account password to verify your identity.
+      </p>
+
+      <form id="disable-2fa-form">
+        <div class="form-group">
+          <label class="form-label" for="disable-password-input">Account Password</label>
+          <input type="password" id="disable-password-input" class="form-control" placeholder="••••••••••••" required>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; margin-top: 1rem;">
+          <button type="button" class="modal-close btn btn-secondary" style="flex: 1;">Cancel</button>
+          <button type="submit" id="btn-confirm-disable" class="btn btn-danger" style="flex: 1;">Confirm & Disable</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <p>Secure Login System &bull; Cryptographic Defense &bull; Session Isolation</p>
+  </footer>
+
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>

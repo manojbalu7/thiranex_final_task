@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Secure Account | SecureShield</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="/" class="nav-brand">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      </svg>
+      Secure<span>Shield</span> Auth
+    </a>
+    <div class="nav-links">
+      <a href="/login.html" class="nav-link">Sign In</a>
+      <a href="/security-demo.html" class="nav-link">Security Demo</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div class="auth-container">
+      <div class="card">
+        <h2 class="card-title">Create Account</h2>
+        <p class="card-subtitle">Register with encrypted credentials and password protection</p>
+
+        <div id="auth-alert" class="alert"></div>
+
+        <form id="register-form" autocomplete="off">
+          <div class="form-group">
+            <label class="form-label" for="username">Username</label>
+            <input type="text" id="username" class="form-control" placeholder="johndoe" required autofocus>
+            <div class="form-hint">3-30 characters, alphanumeric & underscores only</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="email">Email Address</label>
+            <input type="email" id="email" class="form-control" placeholder="john@example.com" required>
+            <div class="form-hint">Used for verification and identity</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="password">Password</label>
+            <input type="password" id="password" class="form-control" placeholder="••••••••••••" required>
+            
+            <div class="strength-meter-container">
+              <div class="strength-bar-bg">
+                <div id="strength-bar" class="strength-bar"></div>
+              </div>
+              <div class="strength-label">
+                <span style="color: #94a3b8;">Password Strength:</span>
+                <span id="strength-text"></span>
+              </div>
+            </div>
+
+            <ul class="password-checklist">
+              <li id="check-length" class="checklist-item">• At least 8 characters</li>
+              <li id="check-upper" class="checklist-item">• One uppercase letter</li>
+              <li id="check-lower" class="checklist-item">• One lowercase letter</li>
+              <li id="check-number" class="checklist-item">• One number (0-9)</li>
+              <li id="check-special" class="checklist-item" style="grid-column: span 2;">• One special symbol (!@#$%^&*)</li>
+            </ul>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" class="form-control" placeholder="••••••••••••" required>
+          </div>
+
+          <button type="submit" id="submit-btn" class="btn btn-primary" style="margin-top: 0.5rem;">
+            Register Account
+          </button>
+        </form>
+
+        <div style="text-align: center; margin-top: 1.5rem; font-size: 0.9rem; color: #94a3b8;">
+          Already have an account? <a href="/login.html" style="color: #38bdf8; text-decoration: none; font-weight: 600;">Sign in here</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Secure Login System &bull; Enterprise Password Hashing with Bcrypt</p>
+  </footer>
+
+  <script src="/js/auth.js"></script>
+</body>
+</html>
